@@ -29,7 +29,6 @@ const style = {
 export default function SongButton(props) {
   // console.log(props.currentSong)
   const { song, voteSong, selected } = props;
-  console.log(selected);
   const votedSymbol = selected ? "«" : " ";
   return (
     <TouchableHighlight

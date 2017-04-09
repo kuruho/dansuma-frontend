@@ -4,12 +4,8 @@ import { Linking, Platform } from "react-native";
 
 import App from "./App";
 
-import {
-  SocketProvider,
-  socketConnect,
-} from 'socket.io-react';
-import io from 'socket.io-client';
-
+import { SocketProvider, socketConnect } from "socket.io-react";
+import io from "socket.io-client";
 
 const wsurl = process.env.WEBSOCKET_URL
   ? process.env.WEBSOCKET_URL
@@ -26,6 +22,12 @@ export default class AppContainer extends React.Component {
       page: 0,
       errors: {},
       items: [],
+      currentSong: {
+        title: "...loading",
+        author: "",
+        color: "#",
+        id: 123
+      },
       songs: [
         {
           title: "Il cielo in una stanza Il cielo in una stanza",
@@ -77,23 +79,30 @@ export default class AppContainer extends React.Component {
       // ]
     };
 
+    this.socket = io.connect(wsurl, { transports: ["websocket"] });
 
-    this.socket = io.connect(wsurl, { transports: ['websocket'] });
+    setTimeout(
+      () => {
+        // console.log(this.socket)
+        // this.socket.emit('user:login')
+        console.log("ready");
+        this.socket.emit("app:ready");
+      },
+      500
+    );
 
-    setTimeout(() => {
-      // console.log(this.socket)
-      // this.socket.emit('user:login')
-      console.log('emi')
-      this.socket.emit('app:ready')
-    
-    }, 1000)
-    
-    // setTimeout(() => {
-      this.socket.on('blabla', msg => {
-        console.log('something',msg)
-      });
-    // }, 2000)
+    this.socket.on("app:state", data => {
+      console.log("appstate", data.data);
+      const appState = data.data;
 
+      this.setState({ currentSong: appState.song });
+    });
+
+    this.socket.on("app:songlist", data => {
+      console.log("appsonglist", data.data);
+      const songs = data.data;
+      this.setState({ songs: songs });
+    });
 
     this.loadMore = this.loadMore.bind(this);
     this.loadItems = this.loadItems.bind(this);
@@ -190,6 +199,7 @@ export default class AppContainer extends React.Component {
           votedSong={this.state.votedSong}
           votedColor={this.state.votedColor}
           songs={this.state.songs}
+          currentSong={this.state.currentSong}
         />
       </SocketProvider>
     );

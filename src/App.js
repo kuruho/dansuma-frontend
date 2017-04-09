@@ -89,16 +89,9 @@ export default class App extends React.Component {
       voteSong,
       votedColor,
       votedSong,
-      songs
+      songs,
+      currentSong
     } = this.props;
-
-
-    const currentSong = {
-      title: "Il cielo in una stanza",
-      author: "Albano",
-      color: "yellow",
-      id: 123
-    };
 
     return (
       <Card>
