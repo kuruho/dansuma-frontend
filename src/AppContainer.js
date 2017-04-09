@@ -7,7 +7,7 @@ import App from "./App";
 import { SocketProvider, socketConnect } from "socket.io-react";
 import io from "socket.io-client";
 
-const wsurl = 'http://' + location.hostname + ":4000";
+const wsurl = 'http://' + location.hostname + ":7001";
 
 // const wsurl = 'http://192.168.40.106:4000'
 
