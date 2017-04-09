@@ -231,6 +231,9 @@ export default class App extends React.Component {
             {/* Display */}
             <Display currentSong={currentSong} votedColor={votedColor}/>
             {/*List songbuttons*/}
+            <View style={{padding: 2, backgroundColor:'rgb(253, 255, 174)'}}>
+              Vote a song below to suggest the next one!
+            </View>
             <View style={{ backgroundColor: "#dadada", flex:1, justifyContent:'space-around' }}>
               {/*Songbutton*/}
               {songs.map(song => (
