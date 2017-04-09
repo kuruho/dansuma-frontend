@@ -1,4 +1,4 @@
-/* global fetch */
+/* global fetch, location */
 import React from "react";
 import { Linking, Platform } from "react-native";
 
@@ -7,9 +7,9 @@ import App from "./App";
 import { SocketProvider, socketConnect } from "socket.io-react";
 import io from "socket.io-client";
 
-const wsurl = process.env.WEBSOCKET_URL
-  ? process.env.WEBSOCKET_URL
-  : "http://localhost:4000";
+const wsurl = 'http://' + location.hostname + ":4000";
+
+// const wsurl = 'http://192.168.40.106:4000'
 
 export default class AppContainer extends React.Component {
   constructor(props, context) {
