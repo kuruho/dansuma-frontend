@@ -2,7 +2,7 @@ var app = require("http").createServer(handler);
 var io = require("socket.io")(app, { transports: ["websocket"] });
 var fs = require("fs");
 
-app.listen(4000);
+app.listen(7001);
 
 var sockets = {};
 var userCounts = 0;
@@ -145,4 +145,4 @@ io.on("connection", function(socket) {
   });
 });
 
-console.log("server started at 4000");
+console.log("server started at 7001");
