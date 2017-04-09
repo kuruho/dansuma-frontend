@@ -25,8 +25,8 @@ function handler(req, res) {
 
 let appState = {
   song: {
-    title: "Il cielo in una stanza",
-    author: "albano",
+    title: "Yellow Submarine",
+    author: "Beatles",
     color: "#eee",
     id: 123
   },
@@ -36,32 +36,32 @@ let appState = {
 
 let appSonglist = [
   {
-    title: "Il remoto in una stanza Il cielo in una stanza",
-    author: "Albano",
+    title: "Bandiera gialla",
+    author: "Gianni Pettenati",
     color: "yellow",
     id: 1
   },
   {
     title: "Il cielo in una stanza",
-    author: "Albano",
+    author: "Gino Paoli",
     color: "green",
     id: 2
   },
   {
-    title: "Il cielo in una stanza",
-    author: "Albano",
+    title: "Romagna mia",
+    author: "Raoul Casadei",
     color: "violet",
     id: 3
   },
   {
-    title: "Il cielo in una stanza",
-    author: "Albano",
+    title: "Ma che bontà",
+    author: "Mina",
     color: "blue",
     id: 4
   },
   {
-    title: "Ero io forse",
-    author: "Mina",
+    title: "Montagne verdi",
+    author: "Marcella Bella",
     color: "orange",
     id: 5
   }
