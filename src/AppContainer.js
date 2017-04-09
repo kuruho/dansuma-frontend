@@ -4,50 +4,60 @@ import { Linking, Platform } from "react-native";
 
 import App from "./App";
 
+import {
+  SocketProvider,
+  socketConnect,
+} from 'socket.io-react';
+import io from 'socket.io-client';
+
+
+const wsurl = process.env.WEBSOCKET_URL
+  ? process.env.WEBSOCKET_URL
+  : "http://localhost:4000";
+
 export default class AppContainer extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       votedSong: null,
       votedColor: null,
-      
 
       filter: "Top", // 'Latest''
       page: 0,
       errors: {},
       items: [],
       songs: [
-      {
-        title: "Il cielo in una stanza Il cielo in una stanza",
-        author: "Albano",
-        color: "yellow",
-        id: 1
-      },
-      {
-        title: "Il cielo in una stanza",
-        author: "Albano",
-        color: "green",
-        id: 2
-      },
-      {
-        title: "Il cielo in una stanza",
-        author: "Albano",
-        color: "violet",
-        id: 3
-      },
-      {
-        title: "Il cielo in una stanza",
-        author: "Albano",
-        color: "blue",
-        id: 4
-      },
-      {
-        title: "Ero io forse",
-        author: "Mina",
-        color: "orange",
-        id: 5
-      }
-    ]
+        {
+          title: "Il cielo in una stanza Il cielo in una stanza",
+          author: "Albano",
+          color: "yellow",
+          id: 1
+        },
+        {
+          title: "Il cielo in una stanza",
+          author: "Albano",
+          color: "green",
+          id: 2
+        },
+        {
+          title: "Il cielo in una stanza",
+          author: "Albano",
+          color: "violet",
+          id: 3
+        },
+        {
+          title: "Il cielo in una stanza",
+          author: "Albano",
+          color: "blue",
+          id: 4
+        },
+        {
+          title: "Ero io forse",
+          author: "Mina",
+          color: "orange",
+          id: 5
+        }
+      ]
       // items: [
       //   {
       //     created_at: "2016-08-08T13:09:09.000Z",
@@ -66,25 +76,42 @@ export default class AppContainer extends React.Component {
       //   },
       // ]
     };
+
+
+    this.socket = io.connect(wsurl, { transports: ['websocket'] });
+
+    setTimeout(() => {
+      // console.log(this.socket)
+      // this.socket.emit('user:login')
+      console.log('emi')
+      this.socket.emit('app:ready')
+    
+    }, 1000)
+    
+    // setTimeout(() => {
+      this.socket.on('blabla', msg => {
+        console.log('something',msg)
+      });
+    // }, 2000)
+
+
     this.loadMore = this.loadMore.bind(this);
     this.loadItems = this.loadItems.bind(this);
     this.openUrl = this.openUrl.bind(this);
     this.toggleOverlay = this.toggleOverlay.bind(this);
     this.voteSong = this.voteSong.bind(this);
-
   }
 
   componentDidMount() {
     // default items load
-    this.loadItems(this.state.filter);
+    // this.loadItems(this.state.filter);
   }
 
   voteSong(songId) {
-
     // votedColor: this.state.songs[songId].color
-    const items = this.state.songs
-    const selSong = items.find(el => el.id === songId)
-    this.setState({votedSong: songId, votedColor: selSong.color})
+    const items = this.state.songs;
+    const selSong = items.find(el => el.id === songId);
+    this.setState({ votedSong: songId, votedColor: selSong.color });
     console.log(`voted ${songId}`);
     // console.log(this.state)
   }
@@ -147,21 +174,24 @@ export default class AppContainer extends React.Component {
 
   render() {
     return (
-      <App
-        items={this.state.items}
-        errors={this.state.errors}
-        loading={this.state.loading}
-        filter={this.state.filter}
-        overlayVisible={this.state.overlayVisible}
-        onOpenUrl={this.openUrl}
-        onLoadItems={this.loadItems}
-        onLoadMore={this.loadMore}
-        onToggleOverlay={this.toggleOverlay}
-        voteSong={this.voteSong}
-        votedSong={this.state.votedSong}
-        votedColor={this.state.votedColor}        
-        songs={this.state.songs}
-      />
+      <SocketProvider socket={this.socket}>
+        {/*<Event event="response" handler={this.handleEventResponse} />*/}
+        <App
+          items={this.state.items}
+          errors={this.state.errors}
+          loading={this.state.loading}
+          filter={this.state.filter}
+          overlayVisible={this.state.overlayVisible}
+          onOpenUrl={this.openUrl}
+          onLoadItems={this.loadItems}
+          onLoadMore={this.loadMore}
+          onToggleOverlay={this.toggleOverlay}
+          voteSong={this.voteSong}
+          votedSong={this.state.votedSong}
+          votedColor={this.state.votedColor}
+          songs={this.state.songs}
+        />
+      </SocketProvider>
     );
   }
 }

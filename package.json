@@ -7,7 +7,8 @@
     "jest-cli": "18.0.0",
     "jest-react-native": "^18.0.0",
     "react-scripts": "0.8.5",
-    "react-test-renderer": "^15.4.2"
+    "react-test-renderer": "^15.4.2",
+    "socket.io": "^1.7.3"
   },
   "dependencies": {
     "moment": "^2.15.1",
@@ -15,7 +16,8 @@
     "react-dom": "~15.4.1",
     "react-native": "0.43.2",
     "react-native-material-design-styles": "^0.2.6",
-    "react-native-web": "0.0.81"
+    "react-native-web": "0.0.81",
+    "socket.io-react": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
