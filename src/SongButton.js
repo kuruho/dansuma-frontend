@@ -11,15 +11,16 @@ const style = {
   },
   colorArea: {
     height: 40,
-    padding: 5,
+    padding: 5
   },
   songTextArea: {
-    marginLeft:5,
+    marginLeft: 5,
+    fontSize: 20,
     justifyContent: "center",
-    flex:1
+    flex: 1
   },
   votedArea: {
-    marginLeft:5,
+    marginLeft: 5,
     justifyContent: "center",
     fontSize: 30
   }
@@ -28,20 +29,25 @@ const style = {
 export default function SongButton(props) {
   // console.log(props.currentSong)
   const { song, voteSong, selected } = props;
-  console.log(selected)
-  const votedSymbol = selected ? "⮈" : " " 
+  console.log(selected);
+  const votedSymbol = selected ? "«" : " ";
   return (
-    <TouchableHighlight style={style.container}
+    <TouchableHighlight
+      style={style.container}
+      underlayColor={song.color}
       onPress={() => {
-        voteSong(song.id)
-        console.log("press", song.id);
+        voteSong(song.id);
+        {
+          /*console.log("press", song.id);*/
+        }
       }}
     >
       <View key={song.id} style={{ flexDirection: "row" }}>
-        <View style={[style.colorArea, { backgroundColor: song.color}]} />
-          
-        
-        <View style={style.songTextArea}>{song.title}</View>
+        <View
+          style={[style.colorArea, { backgroundColor: song.color, width: 25 }]}
+        />
+
+        <View style={style.songTextArea}>{song.title} - {song.author}</View>
         <View style={style.votedArea}> {votedSymbol}</View>
       </View>
     </TouchableHighlight>

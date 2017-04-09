@@ -12,7 +12,7 @@ export default function Display(props) {
   const {currentSong, votedColor} = props
   return (
     <View style={[style, { backgroundColor: votedColor ? votedColor : '#eee'}]}>
-      Now playing: <Text style={{fontWeight:600}}>{currentSong.title} - {currentSong.author}</Text>
+      Now playing: <Text style={{fontWeight:600, fontSize: 20}}>{currentSong.title} - {currentSong.author}</Text>
     </View>
   );
 }

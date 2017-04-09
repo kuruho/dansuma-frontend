@@ -18,7 +18,7 @@ export default class AppContainer extends React.Component {
       items: [],
       songs: [
       {
-        title: "Il cielo in una stanza",
+        title: "Il cielo in una stanza Il cielo in una stanza",
         author: "Albano",
         color: "yellow",
         id: 1
