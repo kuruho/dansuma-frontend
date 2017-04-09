@@ -109,7 +109,7 @@ export default class App extends React.Component {
 
           <Overlay visible={overlayVisible}>
             <Text style={{ fontSize: 18 }}>
-              <Text style={{ fontWeight: "bold" }}>Gioplayer</Text>
+              <Text style={{ fontWeight: "bold" }}>Dansuma</Text>
               {" "}
               is a simple Hacker News reader for the Web and a React Native app (Android / iOS).
             </Text>
@@ -122,16 +122,6 @@ export default class App extends React.Component {
               >
                 <Text style={[styles.aboutLink, cursorStyle]}>
                   {" "}Luigi Maselli
-                </Text>
-              </Text>
-              , source code:
-              <Text
-                onPress={() => {
-                  onOpenUrl("https://github.com/grigio/HAgnostic-News");
-                }}
-              >
-                <Text style={[styles.aboutLink, cursorStyle]}>
-                  {" "}github.com/grigio/HAgnostic-News
                 </Text>
               </Text>
             </Text>
@@ -148,7 +138,7 @@ export default class App extends React.Component {
               <View style={styles.row}>
                 <Image source={logo} style={{ width: 20 }} />
                 <Text style={[{ fontWeight: "bold", paddingLeft: 4 }]}>
-                  Gioplayer
+                  Dansuma
                 </Text>
                 <Text style={[{ fontSize: 12, paddingLeft: 4 }]}>
                   {" "}{Platform.OS}
