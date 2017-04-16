@@ -7,9 +7,9 @@ import App from "./App";
 import { SocketProvider, socketConnect } from "socket.io-react";
 import io from "socket.io-client";
 
-const wsurl = 'http://' + location.hostname + ":7001";
+// const wsurl = 'http://' + location.hostname + ":7001";
 
-// const wsurl = 'http://192.168.40.106:4000'
+const wsurl = 'http://192.168.40.109:7001'
 
 export default class AppContainer extends React.Component {
   constructor(props, context) {
@@ -91,11 +91,19 @@ export default class AppContainer extends React.Component {
       500
     );
 
+    // this.socket.on("app:vote", id => {
+    //   console.log("vote ws", id,this.socket);
+    //   this.socket.emit("app:vote", {
+    //     id: id,
+    //     user_id: 666
+    //   });
+    // });
+
     this.socket.on("app:state", data => {
       console.log("appstate", data.data);
       const appState = data.data;
 
-      this.setState({ currentSong: appState.song });
+      this.setState({ currentSong: appState });
     });
 
     this.socket.on("app:songlist", data => {
@@ -121,7 +129,12 @@ export default class AppContainer extends React.Component {
     const items = this.state.songs;
     const selSong = items.find(el => el.id === songId);
     this.setState({ votedSong: songId, votedColor: selSong.color });
-    console.log(`voted ${songId}`);
+    console.log(`voted ${songId}`,this.socket);
+
+      this.socket.emit("app:vote", {
+        id: songId,
+        user_id: 666
+      });
     // console.log(this.state)
   }
 
