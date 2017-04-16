@@ -7,9 +7,9 @@ import App from "./App";
 import { SocketProvider, socketConnect } from "socket.io-react";
 import io from "socket.io-client";
 
-// const wsurl = 'http://' + location.hostname + ":7001";
+const wsurl = 'http://' + location.hostname + ":7001";
 
-const wsurl = 'http://192.168.40.109:7001'
+// const wsurl = 'http://192.168.40.109:7001'
 
 export default class AppContainer extends React.Component {
   constructor(props, context) {
